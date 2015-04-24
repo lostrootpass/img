@@ -1,0 +1,79 @@
+$def with(message = None, type = None)
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Image Uploader</title>
+		<link rel="stylesheet" type="text/css" href="/static/style.css" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+		<link href='http://fonts.googleapis.com/css?family=Oxygen:400,300,700' rel='stylesheet' type='text/css'>
+		<script src="/static/upload.js"></script>
+	</head>
+	<body>
+		<div id="container">
+		<div id="dropzone">
+			<div class="spinner" id="imagespinner">
+				  <div class="rect1"></div>
+				  <div class="rect2"></div>
+				  <div class="rect3"></div>
+				  <div class="rect4"></div>
+				  <div class="rect5"></div>
+			</div>
+			$if type:
+				<div id="message" class="error">
+				<p id="message_text">$:message</p>
+				</div>
+			$else:
+				<div id="message">
+				<p id="message_text">$:message</p>
+				</div>
+
+
+	<div id="uploaddetails">
+				<div id="instructions">
+					<p>drop an image here</p>
+					<p>or</p>
+					<a href="#" id="fileselector">choose one yourself</a>
+					<form action="#" id="uploadform" method="POST" enctype="multipart/form-data">
+						<input type="file" name="uploader" accept="image/*" id="uploader" style="display: none;" />
+					</form>
+				</div>
+			</div>
+			<div id="preview_container">
+				<img id="preview" />
+			</div>
+		</div>
+		<div id="settings">
+			<h3>While that happens...</h3>
+			<form action="#" id="settingsform">
+				<fieldset>
+					<legend>Delete image after...</legend>
+					<input type="checkbox" name="enable_day_delete" id="enable_day_delete" onchange="updateSettings()">
+						<label for="enable_day_delete"><input type="number" min="1" max="365" value="7" name="days_before_delete" onchange="updateSettings()"></input> days</label>
+					</input><br />
+					<input type="checkbox" name="enable_view_delete" id="enable_view_delete" onchange="updateSettings()">
+						<label for="enable_view_delete"><input type="number" min="1" max="9999" value="1000" name="views_before_delete" onchange="updateSettings()"></input> views</label>
+					</input><br />
+					<input type="checkbox" name="enable_inactive_delete" id="enable_inactive_delete" checked onchange="updateSettings()">
+						<label for="enable_inactive_delete"><input type="number" min="1" max="365" value="7" name="inactive_days_before_delete" onchange="updateSettings()"></input> days without a view</label>
+					</input>
+					<br />
+					<div id="settingsspinner"></div>
+					<div id="checkmark"></div>
+				</fieldset>
+			</form>
+			
+			<p class="url">look at it
+				<span class="spacer"></span>
+				<input type="text" name="image_url" size="30" id="image_url" value="loading..." disabled="true" readonly></input>
+			</p>
+			<p class="url">delete it
+			<input type="text" name="delete_url" size="30" id="delete_url" value="loading..." disabled="true" readonly></input>
+			</p>
+			<p class="demowarn">Demo: images may be deleted at any time regardless of above settings.</p>
+		</div>
+		</div>
+		<div id="footer">
+			<p>Created by <a href="http://pmurdoch.com/">Pete Murdoch</a></a>
+		</div>
+	</body>
+</html>
