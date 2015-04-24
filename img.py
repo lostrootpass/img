@@ -16,7 +16,7 @@ web.config.db_printing = True
 urls = (
     '/', 'index',
 	'/upload', 'handlers.upload.Uploader',
-	'/([a-zA-Z0-9]+)\.([a-zA-Z]{1,4})', 'handlers.view.View',
+	'/([a-zA-Z0-9\-]+)\.([a-zA-Z]{1,4})', 'handlers.view.View',
 	'/delete/([a-zA-Z0-9]+)', 'handlers.delete.Delete',
 	'/update', 'handlers.update.Update',
 	'/kill', 'kill'
